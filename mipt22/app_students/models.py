@@ -8,7 +8,7 @@ class FacultyModel(models.Model):
 class StudentsModel(models.Model):
     full_name = models.CharField(max_length=99, editable=True, default=None, verbose_name='ФИО')
     course = models.IntegerField(editable=True, default=None, verbose_name='Курс')
-    faculty = models.ForeignKey(FacultyModel, on_delete=models.CASCADE, verbose_name='Специальность')
+    faculty = models.ForeignKey(FacultyModel, null=True, on_delete=models.SET_NULL, verbose_name='Специальность')
 
 
 class BursaModel(models.Model):
@@ -19,6 +19,7 @@ class BursaModel(models.Model):
 class RoomModel(models.Model):
     number = models.CharField(max_length=10, editable=True, default=None, verbose_name='Номер Комнаты')
     students = models.ManyToManyField(StudentsModel, verbose_name='')
+    # Можно и ForeignKey
 
 
 class ConnectionBursaRoomModel(models.Model):
